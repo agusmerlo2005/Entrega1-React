@@ -1,20 +1,41 @@
 import React from 'react';
+// [NUEVO] Importamos el componente Link para la navegación SPA
+import { Link } from 'react-router-dom'; 
+
 import CartWidget from './CartWidget'; // Importa el componente del carrito
 
 const NavBar = () => {
+    // Definimos las categorías que queremos mostrar y que coinciden con la ruta /category/:categoryId
+    const categories = [
+        { name: "Tecnología", id: "tecnologia" },
+        { name: "Hogar", id: "hogar" },
+        // Mantenemos "Ofertas" como una categoría, aunque puedes cambiarle el id si quieres.
+        { name: "Ofertas", id: "ofertas" }, 
+    ];
+
     return (
         <nav style={styles.navBar}>
             {/* Logo de la tienda */}
             <div style={styles.logo}>
-                <a href="/" style={styles.logoLink}>Mi Tienda Online</a>
+                {/* [MODIFICADO] Usamos <Link to="/"> para ir al catálogo principal */}
+                <Link to="/" style={styles.logoLink}>Mi Tienda Online</Link>
             </div>
 
             {/* Enlaces de navegación */}
             <ul style={styles.navList}>
-                <li><a href="#categoria1" style={styles.navLink}>Tecnología</a></li>
-                <li><a href="#categoria2" style={styles.navLink}>Hogar</a></li>
-                <li><a href="#ofertas" style={styles.navLink}>Ofertas</a></li>
-                <li><a href="#contacto" style={styles.navLink}>Contacto</a></li>
+                {/* Usamos el método map() para generar los enlaces de categoría dinámicamente */}
+                {categories.map((cat) => (
+                    <li key={cat.id}>
+                        {/* [MODIFICADO] Usamos <Link to="..."> */}
+                        {/* La ruta es /category/ seguido del ID de la categoría (ej: /category/tecnologia) */}
+                        <Link to={`/category/${cat.id}`} style={styles.navLink}>
+                            {cat.name}
+                        </Link>
+                    </li>
+                ))}
+                
+                {/* [MODIFICADO] Mantenemos Contacto, pero lo dirigimos a una ruta simple si la creas (o lo mantenemos temporalmente sin funcionalidad) */}
+                <li><Link to="/contacto" style={styles.navLink}>Contacto</Link></li>
             </ul>
 
             {/* Widget del Carrito de Compras */}
@@ -25,25 +46,20 @@ const NavBar = () => {
 
 export default NavBar;
 
-// Estilos básicos en JavaScript (MODIFICADOS PARA ESTÉTICA Y RESPONSIVE)
+// Estilos básicos en JavaScript (Mismos estilos que antes)
 const styles = {
-    // ESTILOS DE ESCRITORIO (Base)
+    // ... (El objeto styles permanece exactamente igual)
     navBar: {
         display: 'flex',
-        // Cambiamos a 'space-between' para un espaciado más limpio
         justifyContent: 'space-between', 
         alignItems: 'center',
-        backgroundColor: '#1f242d', // Un negro más profundo
-        padding: '15px 30px', // Hacemos la barra más alta y con buen relleno lateral
+        backgroundColor: '#1f242d', 
+        padding: '15px 30px', 
         color: 'white',
-        boxShadow: '0 3px 6px rgba(0, 0, 0, 0.2)', // Sombra para que flote
-
-        // Simulamos un Media Query simple (solo se aplicaría si usáramos un hook)
-        // Por la limitación de CSS-in-JS puro, lo mantenemos horizontal,
-        // pero ajustamos el espaciado para que no se rompa en móvil.
+        boxShadow: '0 3px 6px rgba(0, 0, 0, 0.2)', 
     },
     logo: {
-        fontSize: '2rem', // Hacemos el logo más grande
+        fontSize: '2rem', 
         fontWeight: '700',
     },
     logoLink: {
@@ -54,10 +70,8 @@ const styles = {
         listStyle: 'none',
         display: 'flex',
         margin: 0,
-        // Reducimos el espaciado para que quepa en pantallas pequeñas si no hay media query
         gap: '20px', 
         padding: 0,
-        // Esto empuja la lista ligeramente a la izquierda en pantallas grandes
         flexGrow: 1, 
         justifyContent: 'center', 
     },
