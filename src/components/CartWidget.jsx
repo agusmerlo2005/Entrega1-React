@@ -1,17 +1,37 @@
-import React from 'react';
+import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
-// Componente simple que simula el ícono del carrito de compras.
-const CartWidget = () => {
-  // Puedes usar un ícono de texto o un emoji simple si no usas una librería de íconos.
-const iconoCarrito = '🛒'; 
-  const contador = 5; // Ejemplo: 5 ítems en el carrito
+export default function CartWidget() {
+  const { totalQuantity } = useCart();
 
-return (
-    <div style={{ fontSize: '1.5rem', marginLeft: '20px' }}>
-    {iconoCarrito} 
-    <span style={{ marginLeft: '5px', fontWeight: 'bold' }}>{contador}</span>
-    </div>
-);
-};
+  return (
+    <Link
+      to="/cart"
+      style={{
+        position: "relative",
+        textDecoration: "none",
+        fontSize: "22px",
+      }}
+    >
+      🛒
 
-export default CartWidget;
+      {totalQuantity > 0 && (
+        <span
+          style={{
+            position: "absolute",
+            top: "-8px",
+            right: "-10px",
+            backgroundColor: "red",
+            color: "white",
+            borderRadius: "50%",
+            padding: "2px 6px",
+            fontSize: "12px",
+            fontWeight: "bold",
+          }}
+        >
+          {totalQuantity}
+        </span>
+      )}
+    </Link>
+  );
+}

@@ -1,36 +1,31 @@
 import React, { useState } from 'react';
+import '../App.css';
 
-const ItemCount = ({ initial, stock, onAdd }) => {
+const ItemCount = ({ stock, initial, onAdd }) => {
     const [count, setCount] = useState(initial);
 
-    const increment = () => {
-        if (count < stock) {
-            setCount(count + 1);
-        }
-    };
-
-    const decrement = () => {
-        if (count > initial) {
-            setCount(count - 1);
-        }
-    };
+    const increment = () => count < stock && setCount(count + 1);
+    const decrement = () => count > 1 && setCount(count - 1);
 
     return (
-        <div style={styles.container}>
-            <div style={styles.controls}>
-                <button onClick={decrement} disabled={count === initial} style={styles.button}>-</button>
-                <span style={styles.count}>{count}</span>
-                <button onClick={increment} disabled={count === stock} style={styles.button}>+</button>
+        <div className="counter-container">
+            <div className="counter-controls">
+                <button className="btn-count" onClick={decrement}>-</button>
+                <span className="count-number">{count}</span>
+                <button className="btn-count" onClick={increment}>+</button>
             </div>
-            <button onClick={() => onAdd(count)} disabled={stock === 0} style={styles.addButton}>
-                {stock > 0 ? "Agregar al carrito" : "Sin Stock"}
+            <button 
+                className="btn-add-cart" 
+                onClick={() => onAdd(count)}
+                disabled={stock === 0}
+            >
+                {stock === 0 ? 'Sin Stock' : 'Agregar al carrito'}
             </button>
         </div>
     );
 };
 
 export default ItemCount;
-
 const styles = {
     container: {
         display: 'flex',

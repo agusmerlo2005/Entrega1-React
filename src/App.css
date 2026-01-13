@@ -1,0 +1,283 @@
+/* =========================================
+   1. VARIABLES Y CONFIGURACIÓN GLOBAL
+   ========================================= */
+:root {
+  --primary: #00eeff;          /* Cian Neón */
+  --primary-hover: #00ced1; 
+  --bg-dark: #1f242d;          /* Fondo Tarjetas/Navbar */
+  --bg-second: #323946;        /* Fondo General Body */
+  --text-white: #ffffff;
+  --text-gray: #aaa;
+  --danger: #ff4b4b;           /* Rojo Botones Quitar */
+  --success: #28a745;          /* Verde Confirmar */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-second);
+  color: var(--text-white);
+  line-height: 1.6;
+}
+
+/* =========================================
+   2. NAVBAR
+   ========================================= */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-dark);
+  padding: 1rem 5%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.link-item {
+  color: var(--text-white);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.link-item:hover {
+  color: var(--primary);
+}
+
+/* =========================================
+   3. CATÁLOGO (ItemListContainer)
+   ========================================= */
+.catalog-container {
+  padding: 60px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.catalog-title {
+  color: var(--primary);
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(0, 238, 255, 0.3);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  width: 100%;
+}
+
+.card-link {
+  text-decoration: none;
+  display: block;
+}
+
+.product-card {
+  background-color: var(--bg-dark);
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.product-name { color: white; font-size: 1.4rem; margin-bottom: 10px; }
+.product-desc { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 15px; }
+.product-price { color: var(--primary); font-size: 1.8rem; font-weight: bold; }
+.product-stock { color: #ffc107; font-size: 0.85rem; font-weight: 600; margin-top: 5px; }
+
+/* =========================================
+   4. DETALLE DE PRODUCTO (ItemDetail)
+   ========================================= */
+.detail-card {
+  background-color: var(--bg-dark);
+  padding: 40px;
+  border-radius: 25px;
+  border: 1px solid var(--primary);
+  max-width: 500px;
+  margin: 40px auto;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+/* =========================================
+   5. CONTADOR (ItemCount)
+   ========================================= */
+.counter-container {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.counter-controls {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  background: rgba(255,255,255,0.05);
+  padding: 10px 25px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 238, 255, 0.3);
+}
+
+.btn-count {
+  background: transparent;
+  color: var(--primary);
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.count-number { font-size: 1.3rem; font-weight: bold; color: white; }
+
+.btn-add-cart {
+  background-color: var(--primary);
+  color: var(--bg-dark);
+  border: none;
+  padding: 15px 30px;
+  border-radius: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.btn-add-cart:hover {
+  filter: brightness(1.2);
+  box-shadow: 0 0 15px var(--primary);
+}
+
+/* =========================================
+   6. CARRITO (Cart)
+   ========================================= */
+.cart-item-horizontal {
+  background-color: var(--bg-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  border-left: 5px solid var(--primary);
+}
+
+.btn-remove-circle {
+  background-color: var(--danger);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.cart-total-section {
+  background: linear-gradient(45deg, var(--bg-dark), #3d4452);
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid var(--primary);
+  margin: 30px 0;
+  text-align: center;
+}
+
+.btn-vaciar {
+  background: transparent;
+  color: white;
+  border: 1px solid var(--text-gray);
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+/* =========================================
+   7. FORMULARIO DE COMPRA (Checkout)
+   ========================================= */
+.checkout-section {
+  background-color: #ffffff; /* Fondo blanco para contraste */
+  padding: 40px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 450px;
+  margin: 40px auto;
+  color: #1a1a1a;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.checkout-section h2 {
+  color: #1a1a1a;
+  margin-bottom: 25px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.form-input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.btn-confirm {
+  background-color: var(--success);
+  color: white;
+  border: none;
+  padding: 16px;
+  width: 100%;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-confirm:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
